@@ -2,10 +2,10 @@
 
 ## The Docker Build
 
-The Docker file in the repo contains a multistage build that will install the updates and the java cert tool copy the certificate
+The Docker file in the repo contains a multistage build that will install the updates and the java cert tool and copy the certificate
 The second stage will use the updated keystore produced in the first step and copy it across. It has been confirmed that the certificate was successfully added
 
-Updates are installed during the `artifact` stage ensuring that layer caching is used in case the docker build command needed to be run again. Furthermore the RUN statements are combined so that no new layer us created at each command
+Updates are installed during the `artifact` stage ensuring that layer caching is used in case the docker build command needed to be run again. Furthermore the RUN statements are combined so that no new layer isn't created at each command. The ordering of the commands also matter. Static Values at first (WORDIR) and COPY before RUN where possible. The Docker build command shouldnt use the --no-cache flag allowing the default caching behaviour to happen
 
 ```
 TNDEV28:multistage-docker nirol$ docker build   -t multistage:latest  .
