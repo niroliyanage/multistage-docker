@@ -1,0 +1,18 @@
+---
+# Source: javacert/templates/namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: technical-test
+---
+apiVersion: v1        
+kind: ServiceAccount
+metadata:
+    name: javacert-1580906947
+    labels:
+        helm.sh/chart: javacert-0.1.0
+        app.kubernetes.io/name: javacert
+        app.kubernetes.io/instance: javacert-1580906947
+        app.kubernetes.io/version: "1.16.0"
+        app.kubernetes.io/managed-by: Helm
+    namespace: technical-test

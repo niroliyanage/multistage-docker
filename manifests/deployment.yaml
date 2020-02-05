@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: javacert-1580906947
+    labels:
+        helm.sh/chart: javacert-0.1.0
+        app.kubernetes.io/name: javacert
+        app.kubernetes.io/instance: javacert-1580906947
+        app.kubernetes.io/version: "1.16.0"
+        app.kubernetes.io/managed-by: Helm
+    namespace: technical-test
+spec:
+    replicas: 2
+    selector:
+      matchLabels:
+        app.kubernetes.io/name: javacert
+        app.kubernetes.io/instance: javacert-1580906947
+    template:
+      metadata:
+        labels:
+            app.kubernetes.io/name: javacert
+            app.kubernetes.io/instance: javacert-1580906947
+      spec:
+        serviceAccountName: javacert-1580906947
+        securityContext:
+         {}
+        containers:
+          - name: javacert
+            securityContext:
+             {}
+            #image: "multistage:1.16.0"
+            image: "multistage:latest"
+            imagePullPolicy: IfNotPresent
+            command: [ "/bin/bash", "-c", "--" ]
+            args: [ "while true; do sleep 300; done;" ]
+
+            resources:
+             {}
