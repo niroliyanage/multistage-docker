@@ -1,4 +1,4 @@
-#### multistage-docker
+# multistage-docker
 
 ## The Docker Build
 
@@ -7,7 +7,7 @@ The second stage will use the updated keystore produced in the first step and co
 
 Updates are installed during the `artifact` stage ensuring that layer caching is used in case the docker build command needed to be run again. Furthermore the RUN statements are combined so that no new layer us created at each command
 
-`
+```
 TNDEV28:multistage-docker nirol$ docker build   -t multistage:latest  .
 Sending build context to Docker daemon  78.85kB
 Step 1/9 : FROM openjdk:9-jdk-slim as artifact
@@ -15,7 +15,7 @@ Step 1/9 : FROM openjdk:9-jdk-slim as artifact
 Step 2/9 : RUN apt-get update     && apt-get install --no-install-recommends -y -qq ca-certificates-java
  ---> Using cache
  ---> 531f4fab6e97
-`
+```
 
 ## K8s Deployment
 
@@ -35,6 +35,6 @@ The reason behind including a ReplicaSet was the fact that there was no applicat
 With the above deployment of Kube resources it is quite easy to Scale resources with a single command and can be driven of performance metrics
 
 Assuming only this deployment is running
-`
+```
 kubectl scale --replicas=3 $(kubectl get deployments -n technical-test -o name) -n technical-test
-`
+```
