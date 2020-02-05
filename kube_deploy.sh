@@ -2,7 +2,7 @@
 
 set -uxo pipefail
 
-which helm
+which helmi
 rc=$?
 
 if [ $rc -eq 0 ]
@@ -11,7 +11,7 @@ then
     helm install --generate-name ./javacert
 else
     echo "Deploying Using Manifest files"
-    kubectl apply -f mainifests/namespace.yaml
+    kubectl apply -f manifests/namespace.yaml
     sleep 5
-    kubectl apply -f mainifests/
+    kubectl apply -f manifests/
 fi
